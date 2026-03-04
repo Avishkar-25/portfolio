@@ -308,8 +308,7 @@
         <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
         <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-        <li class="nav-item"><a class="nav-link" href="#timeline">Journey</a></li>
-        <li class="nav-item"><a class="nav-link" href="#testimonials">Testimonials</a></li>
+       
         <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
       </ul>
     </div>
@@ -611,13 +610,14 @@
 
 <script>
 (function(){
-  emailjs.init("8C6OAieoZJKOKz1uQ2");
+  emailjs.init("8C6OAieoZJKOKz1uQ");
 })();
 
 function sendMail(e){
   e.preventDefault(); 
 
-  emailjs.send("service_qeuh4rd","template_ob709ym",{
+  emailjs.send("
+service_qeuh4rd","template_ob709ym",{
     name: "Test User",
     email: "test@gmail.com",
     message: "Hello from portfolio"
