@@ -286,9 +286,9 @@
       border-top: 1px solid #1a1a1a;
     }
   </style>
-<script src="https://cdn.emailjs.com/dist/email.min.js" defer></script> 
+<!-- <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script> -->
 
-  <script>
+  <!-- <script>
   (function(){
     emailjs.init("8C6OAieoZJKOKz1uQ"); // your Public Key
   })();
@@ -313,7 +313,7 @@
       console.log(error);
     });
   });
-</script> 
+</script>  -->
 </head>
 <body class="dot-pattern">
 
@@ -543,21 +543,62 @@
       <div class="col-md-6">
         <div class="hover-card p-4">
           <h5 class="mb-4">Send me a message</h5>
-          <form id="standaloneForm">
-    <div class="mb-3">
-      <input type="text" class="form-control" id="standaloneName" placeholder="Your Name" required>
-    </div>
+         <form id="standaloneForm">
+  <div class="mb-3">
+    <input type="text" class="form-control" id="standaloneName" placeholder="Your Name" required>
+  </div>
 
-    <div class="mb-3">
-      <input type="email" class="form-control" id="standaloneEmail" placeholder="Your Email" required>
-    </div>
+  <div class="mb-3">
+    <input type="email" class="form-control" id="standaloneEmail" placeholder="Your Email" required>
+  </div>
 
-    <div class="mb-3">
-      <textarea class="form-control" rows="4" id="standaloneMessage" placeholder="Your Message" required></textarea>
-    </div>
+  <div class="mb-3">
+    <textarea class="form-control" rows="4" id="standaloneMessage" placeholder="Your Message" required></textarea>
+  </div>
 
-    <button type="submit" class="btn btn-success w-100">Send Message</button>
-  </form>
+  <button type="submit" class="btn btn-success w-100">Send Message</button>
+
+  <!-- In-form status message -->
+  <div id="formStatus" class="mt-3 text-center" style="display: none;"></div>
+</form>
+
+<!-- EmailJS SDK -->
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+  // Initialize EmailJS with your Public Key
+  emailjs.init("8C6OAieoZJKOKz1uQ"); // Replace with your actual public key
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("standaloneForm");
+    const statusDiv = document.getElementById("formStatus");
+
+    form.addEventListener("submit", function(e) {
+      e.preventDefault(); // Prevent page reload
+
+      const templateParams = {
+        name: document.getElementById("standaloneName").value,
+        email: document.getElementById("standaloneEmail").value,
+        message: document.getElementById("standaloneMessage").value
+      };
+
+      emailjs.send("service_qeuh4rd", "template_ob709ym", templateParams)
+        .then(function(response) {
+          statusDiv.style.display = "block";
+          statusDiv.style.color = "green";
+          statusDiv.innerText = "✅ Message sent successfully!";
+          console.log("SUCCESS", response);
+          form.reset();
+        })
+        .catch(function(error) {
+          statusDiv.style.display = "block";
+          statusDiv.style.color = "red";
+          statusDiv.innerText = "❌ Failed to send message. Please try again.";
+          console.log("FAILED", error);
+        });
+    });
+  });
+</script>
         </div>
       </div>
      <div class="col-md-6">
